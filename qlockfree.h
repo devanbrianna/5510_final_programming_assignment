@@ -9,7 +9,7 @@
 //finite time."
 
 
-#include <stdatomic.h>
+#include <omp.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -17,14 +17,14 @@ typedef struct node_lf node_lf_t;
 
 //structure node_t, data:data type, next:pointer
 struct node_lf {
-    _Atomic(node_lf_t*) next;
+    node_lf_t* next;
     int data;
 };
 
 //structure queue_t, head:ptr, tail:ptr
 typedef struct {
-    _Atomic(node_lf_t*) head;
-    _Atomic(node_lf_t*) tail;
+    node_lf_t* head;
+    node_lf_t* tail;
 } qlockfree_t;
 
 void lock_free_init(qlockfree_t *q);

@@ -1,7 +1,8 @@
 #ifndef _QLOCK_H
 #define _QLOCK_H
 
-#include "spinlock-ttas.h"
+//no spinlock, use openMP for mutex
+#include <omp.h>
 //init, enq, deq
 
 //node for queue need first for queue
@@ -11,11 +12,10 @@ typedef struct qnode{
     struct qnode *next;
 }qnode_t;
 
-//head and tail pointer, access protected by TTAS spinlock
+//head and tail pointer, protected by openMP for this implementation
 typedef struct {
     qnode_t *head;
     qnode_t *tail;
-    spinlock lock;
 }qlock_t;
 
 void qlock_init(qlock_t *q);
