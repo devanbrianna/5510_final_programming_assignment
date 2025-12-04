@@ -1,5 +1,6 @@
 #ifndef _QLOCKFREE_H
 #define _QLOCKFREE_H
+//USING OPENMP ATOMICS
 //https://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf
 //using Michael-Scott non-blocking concurrent queue
 //"The lock-free algorithm is non-blocking because if there are
@@ -7,8 +8,6 @@
 //the queue, an operation is guaranteed to complete within
 //finite time."
 
-//do not need structure pointer t fptr: pointer to node t, count: unsigned integerg from OG MS queue
-//never free/ reuse nodes, so ABA doe not happen
 
 #include <stdatomic.h>
 #include <stdlib.h>
