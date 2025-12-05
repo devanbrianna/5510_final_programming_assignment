@@ -45,14 +45,29 @@ test_treiber.o: test_treiber.c
 qlockfree_treiber.o: qlockfree_treiber.c qlockfree_treiber.h
 	$(CC) $(CFLAGS) -c qlockfree_treiber.c
 
-test_omp_queue: test_omp_lockfree_queue.o omp_lockfree_queue.o
-	$(CC) $(CFLAGS) -o test_omp_queue test_omp_lockfree_queue.o omp_lockfree_queue.o
-
 test_qlock_omp: test_qlock_openmp.o qlock.o
 	$(CC) $(CFLAGS) -o test_qlock_omp test_qlock_openmp.o qlock.o
 
+# -------------------------
+# LOCK-FREE with OpenMP
+# -------------------------
+test_lockfree_omp: test_lockfree_openmp.o qlockfree.o
+	$(CC) $(CFLAGS) -o test_lockfree_omp test_lockfree_openmp.o qlockfree.o
+
+test_lockfree_openmp.o: test_lockfree_openmp.c
+	$(CC) $(CFLAGS) -c test_lockfree_openmp.c
+
+# -------------------------
+# LOCK-FREE with C atomics inside OpenMP test harness
+# -------------------------
+test_lockfree_omp_ca: test_lockfree_openmp_ca.o qlockfree_c_atomic.o
+	$(CC) $(CFLAGS) -o test_lockfree_omp_ca test_lockfree_openmp_ca.o qlockfree_c_atomic.o
+
+# Compile the test file (same test file, different output object)
+test_lockfree_openmp_ca.o: test_lockfree_openmp.c
+	$(CC) $(CFLAGS) -c test_lockfree_openmp.c -o test_lockfree_openmp_ca.o
 
 
 # -------------------------
 clean:
-	rm -f *.o test_qlock test_lockfree test_waitfree test_treiber test_omp_queue test_qlock_omp
+	rm -f *.o test_qlock test_lockfree test_waitfree test_treiber test_qlock_omp test_lockfree_omp test_lockfree_omp_ca

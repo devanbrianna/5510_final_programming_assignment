@@ -71,4 +71,7 @@ int omp_lf_enqueue(omp_lf_queue_t *q, int value);
  */
 int omp_lf_dequeue(omp_lf_queue_t *q, int *out);
 
+
+//goes with ./test_omp_queue
+//test_omp_lockfree_queue.c
 #endif

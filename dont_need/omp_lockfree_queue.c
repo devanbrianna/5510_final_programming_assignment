@@ -10,7 +10,7 @@ int omp_lf_enqueue(omp_lf_queue_t *q, int value)
 {
     int idx;
 
-    /* Atomic fetch-and-increment: idx = tail; tail++ */
+    //Atomic fetch-and-increment: idx = tail; tail++ 
     #pragma omp atomic capture
     { idx = q->tail; q->tail++; }
 
