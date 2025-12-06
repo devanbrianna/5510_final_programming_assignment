@@ -1,16 +1,8 @@
 CC = gcc 
 CFLAGS = -std=c11 -O2 -Wall -Wextra -fopenmp
 
-all: test_lockfree_omp_ca test_lockfree_omp test_qlock_omp
+all: test_lockfree_omp_ca test_qlock_omp
 
-# -------------------------
-# LOCK-FREE with OpenMP
-# -------------------------
-test_lockfree_omp: test_lockfree_openmp.o qlockfree.o
-	$(CC) $(CFLAGS) -o test_lockfree_omp test_lockfree_openmp.o qlockfree.o
-
-test_lockfree_openmp.o: test_lockfree_openmp.c
-	$(CC) $(CFLAGS) -c test_lockfree_openmp.c
 
 # -------------------------
 # LOCK-FREE with C atomics inside OpenMP test harness
@@ -34,4 +26,4 @@ test_qlock_openmp.o: test_qlock_openmp.c
 
 # -------------------------
 clean:
-	rm -f *.o test_lockfree_omp_ca test_lockfree_omp test_qlock_omp
+	rm -f *.o test_lockfree_omp_ca test_qlock_omp
