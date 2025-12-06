@@ -1,4 +1,4 @@
-CC = gcc-15
+CC = gcc 
 CFLAGS = -std=c11 -O2 -Wall -Wextra -fopenmp
 
 all: test_lockfree_omp_ca test_lockfree_omp test_qlock_omp
